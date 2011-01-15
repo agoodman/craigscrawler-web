@@ -1,0 +1,34 @@
+!!!
+%html
+	%head
+		%title CraigslistMonitor
+		= stylesheet_link_tag :all
+		= javascript_include_tag :defaults
+		= csrf_meta_tag
+		%script{ :src => "http://www.google.com/jsapi?key=ABQIAAAAPxTP6_umMHWyfMXHRo_PQBSEfduqM-1DVSJvrAuG-sXMl3D3XxRzHgplRb-82VvQp6BVNPn5n6zyAQ", :type => "text/javascript"}
+		%link{:rel => "stylesheet", :href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/blitzer/jquery-ui.css", :type => "text/css"}
+		/ %link{:rel => "icon", :type => "image/png", :href => "/icon.png"}
+		%script{:type => "text/javascript", :charset => "utf-8"}
+			google.load("jquery","1.4.2");
+			google.load("jqueryui","1.8.2");
+		%script{:type => "text/javascript", :charset => "utf-8"}
+			jQuery.noConflict();
+			jQuery(document).ready( function() {
+			jQuery('.button.menu').button({icons:{primary:'ui-icon-circle-triangle-s'},text:false})
+			jQuery('.button.disabled').button({disabled:true});
+			jQuery('.button.arrow-left').button({icons:{primary:'ui-icon-arrowreturnthick-1-e'}});
+			jQuery('.button.trash').button({icons:{primary:'ui-icon-trash'},text:false});
+			jQuery('.button.gear').button({icons:{primary:'ui-icon-gear'},text:false});
+			jQuery('.button.wrench').button({icons:{primary:'ui-icon-wrench'},text:false});
+			jQuery('.button.up').button({icons:{primary:'ui-icon-triangle-1-n'},text:false});
+			jQuery('.button.down').button({icons:{primary:'ui-icon-triangle-1-s'},text:false});
+			jQuery('.button').button();
+			jQuery('.datepicker').datepicker();
+			});
+
+	%body
+		#header
+			craigslist monitor
+		#content= yield
+		#footer
+			© 2011 Migrant Studios

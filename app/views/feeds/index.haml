@@ -1,0 +1,15 @@
+%h1 All Feeds
+
+- if @feeds.empty?
+	%p You have no feeds.
+- else
+	%table
+		%tr
+			%th Region
+			%th Category
+			%th Keywords
+			%th 
+		= render @feeds
+
+%p= link_to_function 'New Feed', "jQuery('#new_feed').dialog({modal:true,title:'Add a Feed',width:'42em'})", :class => 'button'
+#new_feed{:style => 'display:none'}= render 'form', :object => Feed.new

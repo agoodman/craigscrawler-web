@@ -1,0 +1,21 @@
+%h1 Sign Up
+= form_for User.new do |form|
+	%h2 Personal Information
+	%p
+		= form.label :first_name
+		= form.text_field :first_name
+	%p
+		= form.label :last_name
+		= form.text_field :last_name
+	%h2 Account Information
+	%p
+		= form.label :email
+		= form.text_field :email
+	%p
+		= form.label :password
+		= form.password_field :password
+	%p
+		= form.label :password_confirmation
+		= form.password_field :password_confirmation
+		
+	%p= form.submit 'SIGN UP'

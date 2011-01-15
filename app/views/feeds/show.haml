@@ -1,0 +1,25 @@
+#breadcrumb= link_to '« All Feeds', feeds_path
+
+%h1 Editing feed
+
+%h2 Keywords
+- if @feed.keywords.empty?
+	%p None.
+- else
+	%ul
+		= render @feed.keywords
+
+%p= link_to_function 'Add Keyword', "jQuery('#new_keyword').dialog({modal:true,title:'Add Keyword',width:'42em'})", :class => 'button'
+= form_for [@feed,Keyword.new], :html => { :style => 'display:none' } do |form|
+	%p
+		= form.label :value, 'Keyword'
+		= form.text_field :value
+	%p= form.submit 'SAVE KEYWORD', :class => 'button'
+
+%h2 Items
+- if @feed.items.empty?
+	%p No matches yet.
+- else
+	%ul
+		= render @feed.items
+

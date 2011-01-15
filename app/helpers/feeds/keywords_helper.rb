@@ -1,0 +1,2 @@
+module Feeds::KeywordsHelper
+end

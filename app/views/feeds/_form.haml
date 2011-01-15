@@ -1,0 +1,9 @@
+= form_for Feed.new do |f| 
+	= f.hidden_field :user_id, :value => current_user.id
+	%p
+		= f.label :region
+		= f.select :region, options_for_select(Feed::REGIONS.collect {|k,v| [v,k]})
+	%p
+		= f.label :category
+		= f.select :category, options_for_select(Feed::CATEGORIES.collect {|k,v| [v,k]})
+	.actions= f.submit 'Create New Feed', :class => 'button'
