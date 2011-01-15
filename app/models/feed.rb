@@ -10,7 +10,11 @@ class Feed < ActiveRecord::Base
   CATEGORIES = { 'mca' => 'Motorcycles' }
 
   def last_item_published_at
-    items.first.published_at
+    if items.empty?
+      Date.new(2000)
+    else
+      items.first.published_at unless items.empty?
+    end
   end
   
 end
