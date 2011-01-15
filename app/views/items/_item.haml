@@ -1,1 +1,3 @@
-%li= item.title
+%li
+	= item.title
+	= link_to 'details', item.link, :target => '_blank'
