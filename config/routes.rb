@@ -8,6 +8,8 @@ CraigslistMonitor::Application.routes.draw do
   match '/sign_out' => 'sessions#destroy', :via => [ :get, :destroy ]
   match '/sign_up' => 'users#new'
   
+  root :to => 'home#index'
+  
   resources :feeds do
     resources :items
     resources :keywords, :controller => 'feeds/keywords', :only => [ :create, :destroy ]
