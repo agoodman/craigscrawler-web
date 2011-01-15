@@ -2,8 +2,8 @@
 	= f.hidden_field :user_id, :value => current_user.id
 	%p
 		= f.label :region
-		= f.select :region, options_for_select(Feed::REGIONS.collect {|k,v| [v,k]})
+		= f.select :region, options_for_select(Feed::REGIONS.sort {|x,y| x[1]<=>y[1]}.collect {|k,v| [v,k]})
 	%p
 		= f.label :category
-		= f.select :category, options_for_select(Feed::CATEGORIES.collect {|k,v| [v,k]})
+		= f.select :category, options_for_select(Feed::CATEGORIES.sort {|x,y| x[1]<=>y[1]}.collect {|k,v| [v,k]})
 	.actions= f.submit 'Create New Feed', :class => 'button'
