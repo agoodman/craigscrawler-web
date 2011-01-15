@@ -1,0 +1,18 @@
+%h1 Edit Account
+= form_for @user do |form|
+	%h2 Personal Information
+	%p
+		= form.label :first_name
+		= form.text_field :first_name
+	%p
+		= form.label :last_name
+		= form.text_field :last_name
+	%h2 Account Information
+	%p
+		= form.label :email
+		= form.text_field :email
+	%p
+		= form.label :password
+		= link_to 'RESET PASSWORD', new_password_path, :class => 'button'
+		
+	%p= form.submit 'SIGN UP'
