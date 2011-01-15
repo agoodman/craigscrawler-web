@@ -20,10 +20,10 @@ class UsersController < Clearance::UsersController
     @user = current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to account_path, :notice => 'Account Updated' }
+        format.html { redirect_to user_path, :notice => 'Account Updated' }
         format.json { head :ok }
       else
-        format.html { redirect_to account_path, :alert => @user.errors.full_messages.join('<br/>') }
+        format.html { redirect_to user_path, :alert => @user.errors.full_messages.join('<br/>') }
         format.json { render :json => { :errors => @user.errors.full_messages }, :status => :unprocessable_entity }
       end
     end

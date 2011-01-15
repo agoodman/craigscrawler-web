@@ -63,7 +63,7 @@ class UsersControllerTest < ActionController::TestCase
     
     context "on put update" do
       setup { put :update, :user => Factory.attributes_for(:user) }
-      should ('redirect to user'){redirect_to account_path}
+      should ('redirect to user'){redirect_to user_path}
     end
     
     context "on delete destroy" do
