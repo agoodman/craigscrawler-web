@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'clearance'
 require 'shoulda'
 require 'factory_girl'
+require 'clearance/shoulda_macros'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
