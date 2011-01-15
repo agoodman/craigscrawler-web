@@ -2,9 +2,8 @@ CraigslistMonitor::Application.routes.draw do
 
   # clearance routes
   resource :session, :only => [ :create, :destroy ]
-  resource :account, :controller => 'users', :only => [ :edit, :update, :destroy ]
+  resource :user, :controller => 'users', :only => [ :show, :edit, :update, :destroy ]
   resources :users, :only => [ :create ]
-  resource :user, :only => [ :show ]
   match '/sign_in' => 'sessions#new'
   match '/sign_out' => 'sessions#destroy', :via => [ :get, :destroy ]
   match '/sign_up' => 'users#new'
