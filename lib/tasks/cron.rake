@@ -8,7 +8,7 @@ task :cron => :environment do
   User.all.each do |user|
     puts "Processing #{user.first_name} #{user.last_name}"
     user.feeds.each do |feed|
-      url = "http://#{feed.region}.craigslist.org/search/#{feed.category}?query=#{feed.keywords.collect {|k| k.value}.join("+")}&srchType=A&format=rss"
+      url = "http://#{feed.region}.craigslist.org/search/#{feed.category}?query=#{feed.keywords.collect {|k| k.value}.join("+")}&srchType=A&format=rss".gsub(/ /,"+")
       puts "Fetching #{url}"
       rss = Feedzirra::Feed.fetch_and_parse(url)
       cutoff_date = feed.last_item_published_at
