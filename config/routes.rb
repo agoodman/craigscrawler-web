@@ -11,9 +11,10 @@ CraigslistMonitor::Application.routes.draw do
   root :to => 'home#index'
   
   resources :feeds do
-    resources :items
+    resources :items, :controller => 'feeds/items'
     resources :keywords, :controller => 'feeds/keywords', :only => [ :create, :destroy ]
   end
+  resources :items, :only => [ :index ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
