@@ -10,7 +10,12 @@ class ItemsController < ApplicationController
   private
   
   def retrieve_items
-    url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?query=#{params[:feed][:keywords].split(' ').join("+")}&srchType=A&format=rss".gsub(/ /,"+")
+    if params[:feed][:scope]
+      scope = params[:feed][:scope]
+    else
+      scope = "A"
+    end
+    url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?query=#{params[:feed][:keywords].split(' ').join("+")}&srchType=#{scope}&format=rss".gsub(/ /,"+")
     if params[:feed][:filters]
       params[:feed][:filters].keys.each do |f|
         url += "&#{f}=#{params[:feed][:filters][f.to_sym]}"
@@ -22,8 +27,8 @@ class ItemsController < ApplicationController
     # new_entries = rss.entries.select {|e| e.published > cutoff_date}
     if rss
       new_entries = rss.entries
-      puts "Found #{rss.entries.size} entries (#{new_entries.size} new)"
-      regex = /(.+) (\$\d+) (.+)/
+      puts "Found #{rss.entries.size} entries"
+      regex = /(.+) \$(\d+) ?(.*)/
       @items = new_entries.map do |e| 
         if e.title =~ regex
           Item.new(:title => e.title.match(regex)[1], :price => e.title.match(regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
