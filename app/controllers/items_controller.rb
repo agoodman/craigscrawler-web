@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   def index
     retrieve_items
     respond_to do |format|
-      format.json { render :json => @items.to_json(:only => [:title,:price,:summary,:link,:published_at]) }
+      format.json { render :json => @items.to_json(:only => [:title,:price,:summary,:link,:location,:published_at]) }
     end
   end
   
@@ -28,10 +28,16 @@ class ItemsController < ApplicationController
     if rss
       new_entries = rss.entries
       puts "Found #{rss.entries.size} entries"
-      regex = /(.+) \$(\d+) ?(.*)/
+      housing_regex = /(.+) \$(\d+) ?(.*)/
+      location_price_regex = /(.+) \((.+)\) ?\$?(\d+)?/
+      location_regex = /(.+) \((.+)\)/
       @items = new_entries.map do |e| 
-        if e.title =~ regex
-          Item.new(:title => e.title.match(regex)[1], :price => e.title.match(regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+        if e.title =~ location_price_regex
+          Item.new(:title => e.title.match(location_price_regex)[1], :price => e.title.match(location_price_regex)[3], :location => e.title.match(location_price_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+        elsif e.title =~ location_regex
+          Item.new(:title => e.title.match(location_regex)[1], :location => e.title.match(location_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+        elsif e.title =~ housing_regex
+            Item.new(:title => e.title.match(housing_regex)[1], :price => e.title.match(housing_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
         else
           Item.new(:title => e.title, :summary => e.summary, :link => e.url, :published_at => e.published)
         end

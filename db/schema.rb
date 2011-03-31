@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110327234105) do
+ActiveRecord::Schema.define(:version => 20110331023625) do
 
   create_table "feeds", :force => true do |t|
     t.integer   "user_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110327234105) do
     t.timestamp "updated_at"
     t.float     "price"
     t.text      "summary"
+    t.string    "location"
   end
 
   create_table "keywords", :force => true do |t|
