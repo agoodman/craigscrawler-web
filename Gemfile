@@ -8,6 +8,7 @@ gem 'rails', '3.0.3'
 gem 'feedzirra'
 gem 'clearance', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
+gem 'nokogiri'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -21,7 +22,6 @@ gem 'haml'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri'
 # gem 'aws-s3', :require => 'aws/s3'
 
 # Bundle gems for the local environment. Make sure to
