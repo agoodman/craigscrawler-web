@@ -99,6 +99,7 @@ DEPENDENCIES
   factory_girl_rails
   feedzirra
   haml
+  nokogiri
   rails (= 3.0.3)
   shoulda
   sqlite3-ruby
