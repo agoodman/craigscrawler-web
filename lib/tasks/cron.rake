@@ -13,11 +13,15 @@ task :cron => :environment do
       url = "http://#{feed.region}.craigslist.org/search/#{feed.category}?query=#{feed.keywords.collect {|k| k.value}.join("+")}&srchType=A&format=rss".gsub(/ /,"+")
       puts "Fetching #{url}"
       rss = Feedzirra::Feed.fetch_and_parse(url)
-      cutoff_date = feed.last_item_published_at
-      new_entries = rss.entries.select {|e| e.published > cutoff_date}
-      puts "Found #{rss.entries.size} entries (#{new_entries.size} new)"
-      new_entries.each do |e|
-        feed.items.create(:title => e.title, :link => e.url, :published_at => e.published)
+      if rss
+        cutoff_date = feed.last_item_published_at
+        new_entries = rss.entries.select {|e| e.published > cutoff_date}
+        puts "Found #{rss.entries.size} entries (#{new_entries.size} new)"
+        new_entries.each do |e|
+          feed.items.create(:title => e.title, :link => e.url, :published_at => e.published)
+        end
+      else
+        puts "Unable to parse feed"
       end
     end
   end
