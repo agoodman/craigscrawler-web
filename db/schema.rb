@@ -10,14 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110401212504) do
+ActiveRecord::Schema.define(:version => 20110403211048) do
 
   create_table "categories", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "code"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "parent_id"
+    t.string    "code"
+    t.string    "title"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "feeds", :force => true do |t|
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20110401212504) do
     t.string    "value"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+  end
+
+  create_table "regions", :force => true do |t|
+    t.string   "code"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

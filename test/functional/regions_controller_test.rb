@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class CategoriesControllerTest < ActionController::TestCase
+class RegionsControllerTest < ActionController::TestCase
 
   context "on get index as json" do
     setup { get :index, :format => 'json' }
-    should assign_to :categories
+    should assign_to :regions
     should respond_with :success
   end
 

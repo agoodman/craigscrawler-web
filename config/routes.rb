@@ -1,5 +1,7 @@
 CraigslistMonitor::Application.routes.draw do
 
+  get "regions/index"
+
   # clearance routes
   resource :session, :only => [ :create, :destroy ]
   resource :user, :controller => 'users', :only => [ :show, :edit, :update, :destroy ]
@@ -16,6 +18,7 @@ CraigslistMonitor::Application.routes.draw do
   end
   resources :items, :only => [ :index ]
   resources :categories, :only => [ :index ]
+  resources :regions, :only => [ :index ]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
