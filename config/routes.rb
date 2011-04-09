@@ -1,7 +1,5 @@
 CraigslistMonitor::Application.routes.draw do
 
-  get "regions/index"
-
   # clearance routes
   resource :session, :only => [ :create, :destroy ]
   resource :user, :controller => 'users', :only => [ :show, :edit, :update, :destroy ]
@@ -17,6 +15,7 @@ CraigslistMonitor::Application.routes.draw do
     resources :keywords, :controller => 'feeds/keywords', :only => [ :create, :destroy ]
   end
   resources :items, :only => [ :index ]
+  resources :images, :only => [ :index ]
   resources :categories, :only => [ :index ]
   resources :regions, :only => [ :index ]
 
