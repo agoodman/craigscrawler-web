@@ -24,7 +24,7 @@
 
 @font-face {
 	font-family: 'OmnesSemibold';
-	src: url(//:) format('no404'), url('omnes-semibold-webfont.woff') format('woff'), url('omnes-semibold-webfont.ttf') format('truetype'), url('omnes-semibold-webfont.svgz#webfontLYO9Iqk4') format('svg'), url('omnes-semibold-webfont.svg#webfontLYO9Iqk4') format('svg');
+	src: url(//:) format('no404'), url('omnes/omnes-semibold-webfont.woff') format('woff'), url('omnes/omnes-semibold-webfont.ttf') format('truetype'), url('omnes/omnes-semibold-webfont.svgz#webfontLYO9Iqk4') format('svg'), url('omnes/omnes-semibold-webfont.svg#webfontLYO9Iqk4') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -65,6 +65,8 @@ body {
 	background-repeat: repeat-x;
 	background-position: left top;
 	font-family:"Omnes",Helvetica, Arial, sans-serif;
+	color:#333;
+	font-size:16px;
 }
 
 #wrapper {
@@ -73,11 +75,12 @@ body {
 }
 
 #nav ul {
-	width:500px;
+	width:380px;
 	float:right;
 	margin:5px 0;
 	font-size:12px;
 	font-style:italic;
+	padding-bottom:10px;
 }
 	#nav ul li {
 		float:left;
@@ -87,6 +90,7 @@ body {
 	
 	#nav ul li a {
 		color: #b698Ca;
+		font-family:"Omnes",Helvetica, Arial, sans-serif;
 		letter-spacing:1px;
 		text-shadow:1px 1px #000;
 		text-decoration:none;
@@ -95,16 +99,64 @@ body {
 		-moz-border-radius: 4px;
 		-webkit-border-radius:4px;
 		border-radius:4px;
+		-moz-transition:all 0.2s linear;
+		-webkit-transition:all 0.2s linear;
+		transition:all 0.2s linear;
+		
 	}
 	
 	#nav ul li a:hover {
 		box-shadow:0 0 3px #fff;
+		background-color:#5a0e70;
 	}
+	
+/**************** DETAILS & STYLES **************/
+
+
+a {
+	color:#52156B;
+	font-family:"OmnesSemibold", Helvetica, Arial, sans-serif;
+	-moz-transition:all 0.3s ease;
+	-webkit-transition:all 0.3s ease;
+	transition:all 0.3s ease;
+}
+
+a:hover {
+	background-color:#eee;
+	text-shadow:1px 1px 2px #666;
+}
+
+a img {
+	border:none;
+}
+
+strong {
+	font-family:"OmnesSemibold", Helvetica, Arial, sans-serif;
+	font-weight:normal;
+}
+
+.arrows ul {
+	margin-top:25px;
+}
+
+.arrows li {
+	list-style:url(images/bullet-arrow.png);
+	line-height:25px;
+	font-size:18px;
+}
+
+.clearfix {
+	clear:both;
+}
+	
+/************ HOMEPAGE   **************/
 	
 #home-left {
 	width:450px;
 	float:left;
 	padding-top:50px;
+	padding-left:20px;
+	height:400px;
 }
 
 	#home-left h1 {
@@ -117,6 +169,12 @@ body {
 	#home-left h1 a {
 		text-indent:-9000px;
 		display:block;
+		height:75px;
+		width:396px;
+	}
+	
+	#home-left h1 a:hover {
+		background:none;
 	}
 	
 	#home-left h2 {
@@ -124,3 +182,65 @@ body {
 		color:#333;
 		text-shadow:1px 1px 2px #fff;
 	}
+	
+	#appstore {
+		margin-bottom:35px;
+	}
+	
+	#appstore img {
+		float:left;
+		margin-right:10px;
+	}
+	
+	#appstore p {
+		margin-top:25px;
+	}
+	
+	#appstore .price {
+		margin-top:20px;
+		color:#52156B;
+		font-size:26px;
+		font-family:"OmnesSemibold", Helvetica, Arial, sans-serif;
+		text-shadow:1px 1px 1px #fff;
+	}
+	
+	#appstore .version {
+		font-size:11px;
+		font-style:italic;
+		color:#686868;
+	}
+	
+
+#home-right {
+	padding-top:50px;
+	margin-right:90px;
+	float:right;
+}
+
+/****************  PAGE LAYOUTS ****************/
+
+#full-width {
+	clear:left;
+	padding:20px;
+}
+
+#footer {
+	padding:20px;
+}
+	#footer a:hover {
+		background:none;
+	}
+
+/**************  FORMS  *************/
+
+/* Typography */
+.wufoo .info h2{font-size:160%;color: #b698Ca; font-family:"Omnes",Helvetica, Arial, sans-serif;}
+.wufoo .info div{font-size:95%;font-family:inherit;color:#444444}
+.wufoo .section h3{font-size:110%;font-family:inherit;background:#FFFFFF;color: #b698Ca;}
+.wufoo .section div{font-size:85%;font-family:inherit;color:#444444}
+.wufoo label.desc, .wufoo legend.desc{font-size:95%;font-family:inherit;color: #b698Ca;}
+.wufoo li div, .wufoo li div label, .wufoo li span label{font-family:inherit;color:#444444}
+.wufoo input.text, .wufoo textarea.textarea, .wufoo select.select, .wufoo label.choice{font-size:100%;font-family:inherit;color:#333333}
+.wufoo label.choice{color:#444444}
+.wufoo .instruct{font-size:80%;font-family:inherit;color:#444444
+}
