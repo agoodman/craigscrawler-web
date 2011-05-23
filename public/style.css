@@ -72,46 +72,15 @@ body {
 #wrapper {
 	width:960px;
 	margin:0 auto;
+	background:url(images/phone.png) 0 60px no-repeat;
 }
 
-#nav ul {
-	width:380px;
-	float:right;
-	margin:5px 0;
-	font-size:12px;
-	font-style:italic;
-	padding-bottom:10px;
-}
-	#nav ul li {
-		float:left;
-		padding:0 20px;
-		list-style:none;
-	}
-	
-	#nav ul li a {
-		color: #b698Ca;
-		font-family:"Omnes",Helvetica, Arial, sans-serif;
-		letter-spacing:1px;
-		text-shadow:1px 1px #000;
-		text-decoration:none;
-		padding:3px 15px;
-		background-color: #420A52;
-		-moz-border-radius: 4px;
-		-webkit-border-radius:4px;
-		border-radius:4px;
-		-moz-transition:all 0.2s linear;
-		-webkit-transition:all 0.2s linear;
-		transition:all 0.2s linear;
-		
-	}
-	
-	#nav ul li a:hover {
-		box-shadow:0 0 3px #fff;
-		background-color:#5a0e70;
-	}
-	
 /**************** DETAILS & STYLES **************/
 
+h3 {
+	color:#666;
+	font-weight:normal;
+}
 
 a {
 	color:#52156B;
@@ -148,15 +117,122 @@ strong {
 .clearfix {
 	clear:both;
 }
+
+/*************** NAVIGATION  *******************/
+
+#nav ul {
+	width:425px;
+	float:right;
+	margin:5px 0;
+	font-size:12px;
+	padding-bottom:10px;
+}
+	#nav ul li {
+		float:left;
+		padding:0 10px;
+		list-style:none;
+	}
+	
+	#nav ul li a {
+		color: #eee6f2;
+		font-family:"Omnes",Helvetica, Arial, sans-serif;
+		letter-spacing:1px;
+		text-shadow:1px 1px #000;
+		text-decoration:none;
+		padding:3px 15px;
+		background-color: #420A52;
+		-moz-border-radius: 4px;
+		-webkit-border-radius:4px;
+		border-radius:4px;
+		-moz-transition:all 0.2s linear;
+		-webkit-transition:all 0.2s linear;
+		transition:all 0.2s linear;
+		
+	}
+	
+	#nav ul li a:hover {
+		box-shadow:0 0 3px #fff;
+		-webkit-box-shadow: 0 0 3px #fff;
+		-moz-box-shadow: 0 0 3px #fff;
+		background-color:#5a0e70;
+		color:#fff;
+	}
+	
+	#nav ul li.twitter a, #footer ul li.twitter a {
+		display:block;
+		height:20px;
+		width:20px;
+		background:url(images/twitter-off.png) no-repeat;
+		background-color:none;
+		padding:0;
+		margin-top:-3px;
+	}
+	
+#footer {
+	margin:10px 0 20px;
+}
+
+	#footer ul {
+		width:380px;
+		float:right;
+		margin:5px 0;
+		font-size:12px;
+		padding-bottom:10px;
+	}
+	#footer ul li {
+		float:left;
+		padding:0 10px;
+		list-style:none;
+	}
+	
+	#footer ul li a {
+		color: #a682be;
+		font-family:"Omnes",Helvetica, Arial, sans-serif;
+		letter-spacing:1px;
+		text-decoration:none;
+		padding:3px 15px;
+		background-color: #eee6f2;
+		-moz-border-radius: 4px;
+		-webkit-border-radius:4px;
+		border-radius:4px;
+		-moz-transition:all 0.2s linear;
+		-webkit-transition:all 0.2s linear;
+		transition:all 0.2s linear;
+		
+	}
+	
+	#footer ul li a:hover {
+		box-shadow:0 0 3px #8e60ad;
+		-webkit-box-shadow: 0 0 3px #8e60ad;
+		-moz-box-shadow: 0 0 3px #8e60ad;
+		background-color:#cebadb;
+		color:#8e60ad;
+	}
+	
+	#builtby a {
+		display:block;
+		background:url(images/builtby.png) no-repeat;
+		height:30px;
+		width:140px;
+		float:left;
+	}
+	
+	#builtby a:hover {
+		background:url(images/builtby-over.png) no-repeat;
+		display:block;
+		height:30px;
+		width:140px;
+	}
+	
+
 	
 /************ HOMEPAGE   **************/
 	
 #home-left {
-	width:450px;
+	width:960px;
 	float:left;
-	padding-top:50px;
-	padding-left:20px;
 	height:400px;
+	padding-top:20px;
 }
 
 	#home-left h1 {
@@ -210,27 +286,20 @@ strong {
 		color:#686868;
 	}
 	
-
-#home-right {
-	padding-top:50px;
-	margin-right:90px;
-	float:right;
-}
+	
 
 /****************  PAGE LAYOUTS ****************/
 
 #full-width {
 	clear:left;
-	padding:20px;
+	width:960px;
+	padding:20px 0 20px;
 }
 
 #footer {
 	padding:20px;
 }
-	#footer a:hover {
-		background:none;
-	}
-
+	
 /**************  FORMS  *************/
 
 /* Typography */
