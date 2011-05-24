@@ -1,5 +1,7 @@
 CraigslistMonitor::Application.routes.draw do
 
+  resources :queries, :only => :index
+
   # clearance routes
   resource :session, :only => [ :create, :destroy ]
   resource :user, :controller => 'users', :only => [ :show, :edit, :update, :destroy ]

@@ -1,0 +1,12 @@
+%h2 Queries
+%p Statistics on query trends
+
+%h3 Recent Queries
+%ul
+	- @recent_queries.each do |query|
+		%li region: #{query.region} category: #{query.category} keywords: #{query.keywords.map(&:value).join(",")}
+
+%h3 Top Keywords
+%ol
+	- @top_keywords.each do |keyword|
+		%li #{keyword.value} (#{keyword.queries.count})
