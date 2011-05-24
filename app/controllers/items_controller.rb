@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
       scope = "A"
     end
     if params[:feed][:keywords]
-      keywords = params[:feed][:keywords].split(' ').join("+") + "&"
+      keywords = "query=" + params[:feed][:keywords].split(' ').join("+") + "&"
     else
       keywords = ""
     end
