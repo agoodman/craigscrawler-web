@@ -2,8 +2,9 @@ require 'test_helper'
 
 class KeywordTest < ActiveSupport::TestCase
 
-  should belong_to :feed
-  should validate_presence_of :feed_id
+  should have_and_belong_to_many :feeds
+  should have_and_belong_to_many :queries
+  
   should validate_presence_of :value
 
 end

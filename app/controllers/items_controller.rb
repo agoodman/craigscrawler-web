@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+  before_filter :save_query, :only => :index
+  
   def index
     retrieve_items
     respond_to do |format|
@@ -9,13 +11,45 @@ class ItemsController < ApplicationController
   
   private
   
+  def save_query
+    region = params[:feed][:region]
+    category = params[:feed][:category]
+    if params[:feed][:scope]
+      scope = params[:feed][:scope]
+    else
+      scope = "A"
+    end
+    query = Query.new(:region => region, :category => category, :scope => scope)
+    if query.save
+      if params[:feed][:filters]
+        params[:feed][:filters].keys.each do |f|
+          filter = Filter.find_or_create_by_key_and_value(f, params[:feed][:filters][f.to_sym])
+          query.filters << filter
+        end
+      end
+      if ! params[:feed][:keywords].nil?
+        params[:feed][:keywords].split(' ').each do |k|
+          keyword = Keyword.find_or_create_by_value(k)
+          query.keywords << keyword
+        end
+      end
+    else
+      Logger.new(STDOUT).warn("unable to save query")
+    end
+  end
+  
   def retrieve_items
     if params[:feed][:scope]
       scope = params[:feed][:scope]
     else
       scope = "A"
     end
-    url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?query=#{params[:feed][:keywords].split(' ').join("+")}&srchType=#{scope}&format=rss".gsub(/ /,"+")
+    if params[:feed][:keywords]
+      keywords = params[:feed][:keywords].split(' ').join("+") + "&"
+    else
+      keywords = ""
+    end
+    url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?#{keywords}srchType=#{scope}&format=rss".gsub(/ /,"+")
     if params[:feed][:filters]
       params[:feed][:filters].keys.each do |f|
         url += "&#{f}=#{params[:feed][:filters][f.to_sym]}"

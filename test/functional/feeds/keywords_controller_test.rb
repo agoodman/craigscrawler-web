@@ -16,7 +16,8 @@ class Feeds::KeywordsControllerTest < ActionController::TestCase
     
     context "on delete destroy" do
       setup do
-        @keyword = Factory(:keyword, :feed => @feed)
+        @keyword = Factory(:keyword)
+        @feed.keywords << @keyword unless @feed.keywords.include?(@keyword)
         delete :destroy, :feed_id => @feed.id, :id => @keyword.id
       end
       should ('redirect to sign in'){redirect_to sign_in_path}
@@ -29,7 +30,8 @@ class Feeds::KeywordsControllerTest < ActionController::TestCase
     
     context "on delete destroy as json" do
       setup do
-        @keyword = Factory(:keyword, :feed => @feed)
+        @keyword = Factory(:keyword)
+        @feed.keywords << @keyword unless @feed.keywords.include?(@keyword)
         delete :destroy, :format => 'json', :feed_id => @feed.id, :id => @keyword.id
       end
       should respond_with :unauthorized
@@ -50,7 +52,8 @@ class Feeds::KeywordsControllerTest < ActionController::TestCase
     
     context "on delete destroy" do
       setup do
-        @keyword = Factory(:keyword, :feed => @feed)
+        @keyword = Factory(:keyword)
+        @feed.keywords << @keyword unless @feed.keywords.include?(@keyword)
         delete :destroy, :feed_id => @feed.id, :id => @keyword.id
       end
       should ('redirect to feed'){redirect_to feed_path(@feed)}
@@ -63,7 +66,8 @@ class Feeds::KeywordsControllerTest < ActionController::TestCase
     
     context "on delete destroy as json" do
       setup do
-        @keyword = Factory(:keyword, :feed => @feed)
+        @keyword = Factory(:keyword)
+        @feed.keywords << @keyword unless @feed.keywords.include?(@keyword)
         delete :destroy, :format => 'json', :feed_id => @feed.id, :id => @keyword.id
       end
       should respond_with :success

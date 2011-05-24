@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110403211048) do
+ActiveRecord::Schema.define(:version => 20110524202030) do
 
   create_table "categories", :force => true do |t|
     t.integer   "parent_id"
@@ -28,13 +28,33 @@ ActiveRecord::Schema.define(:version => 20110403211048) do
     t.timestamp "updated_at"
   end
 
-  create_table "filters", :force => true do |t|
-    t.integer   "feed_id"
-    t.string    "key"
-    t.string    "value"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+  create_table "feeds_filters", :id => false, :force => true do |t|
+    t.integer "feed_id"
+    t.integer "filter_id"
   end
+
+  add_index "feeds_filters", ["feed_id", "filter_id"], :name => "index_feeds_filters_on_feed_id_and_filter_id", :unique => true
+
+  create_table "feeds_keywords", :id => false, :force => true do |t|
+    t.integer "feed_id"
+    t.integer "keyword_id"
+  end
+
+  add_index "feeds_keywords", ["feed_id", "keyword_id"], :name => "index_feeds_keywords_on_feed_id_and_keyword_id", :unique => true
+
+  create_table "filters", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "filters_queries", :id => false, :force => true do |t|
+    t.integer "filter_id"
+    t.integer "query_id"
+  end
+
+  add_index "filters_queries", ["filter_id", "query_id"], :name => "index_filters_queries_on_filter_id_and_query_id", :unique => true
 
   create_table "items", :force => true do |t|
     t.integer   "feed_id"
@@ -48,18 +68,34 @@ ActiveRecord::Schema.define(:version => 20110403211048) do
     t.string    "location"
   end
 
+  add_index "items", ["feed_id"], :name => "index_items_on_feed_id"
+
   create_table "keywords", :force => true do |t|
-    t.integer   "feed_id"
-    t.string    "value"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "keywords_queries", :id => false, :force => true do |t|
+    t.integer "keyword_id"
+    t.integer "query_id"
+  end
+
+  add_index "keywords_queries", ["keyword_id", "query_id"], :name => "index_keywords_queries_on_keyword_id_and_query_id", :unique => true
+
+  create_table "queries", :force => true do |t|
+    t.string   "region"
+    t.string   "category"
+    t.string   "scope"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "regions", :force => true do |t|
-    t.string   "code"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "code"
+    t.string    "title"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "users", :force => true do |t|

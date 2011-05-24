@@ -1,8 +1,9 @@
 class Feed < ActiveRecord::Base
 
   belongs_to :user
-  has_many :items, :dependent => :destroy, :order => 'published_at desc'
-  has_many :keywords, :dependent => :destroy
+  has_many :items, :dependent => :destroy, :order => 'published_at desc', :limit => 100
+  has_and_belongs_to_many :keywords
+  has_and_belongs_to_many :filters
   
   validates_presence_of :user_id
 

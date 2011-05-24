@@ -17,9 +17,11 @@
 	%p= form.submit 'SAVE KEYWORD', :class => 'button'
 
 %h2 Items
-- if @feed.items.empty?
+- items = @feed.items
+- if items.empty?
 	%p No matches yet.
 - else
+	%p Showing #{items.count} items
 	%ul
-		= render @feed.items
+		= render items
 

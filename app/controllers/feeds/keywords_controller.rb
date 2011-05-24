@@ -5,10 +5,10 @@ class Feeds::KeywordsController < ApplicationController
   
   def create
     @keyword = Keyword.new(params[:keyword])
-    @keyword.feed_id = @feed.id
     
     respond_to do |format|
       if @keyword.save
+        @feed.keywords << @keyword unless @feed.keywords.include?(@keyword)
         format.html {
           flash[:notice] = 'Keyword added.'
           redirect_to @feed
@@ -23,7 +23,7 @@ class Feeds::KeywordsController < ApplicationController
   
   def destroy
     @keyword = Keyword.find(params[:id])
-    @keyword.destroy
+    @feed.keywords.delete @keyword
     
     respond_to do |format|
       format.html { redirect_to @feed }

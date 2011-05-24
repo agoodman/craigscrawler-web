@@ -16,7 +16,7 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    @feed = Feed.includes(:keywords,:items).find(params[:id])
+    @feed = Feed.includes(:keywords).find(params[:id])
 
     respond_to do |format|
       format.html
