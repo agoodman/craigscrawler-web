@@ -4,7 +4,7 @@
 %h3 Recent Queries
 %ul
 	- @recent_queries.each do |query|
-		%li region: #{query.region} category: #{query.category} keywords: #{query.keywords.map(&:value).join(",")}
+		%li region: #{query.region} category: #{query.category} keywords: #{query.keywords.map(&:value).join(", ")}
 
 %h3 Top Keywords
 %ol
