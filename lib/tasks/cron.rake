@@ -65,6 +65,9 @@ task :cron => :environment do
         end
       end
     end
+    
+    puts "Pruning outdated results"
+    Item.delete_all(['created_at < ?',Date.today-3.months])
   end
   
 end
