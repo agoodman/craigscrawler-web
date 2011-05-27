@@ -18,6 +18,7 @@ CraigslistMonitor::Application.routes.draw do
   end
   resources :items, :only => [ :index ]
   resources :images, :only => [ :index ]
+  resources :emails, :only => [ :index ]
   resources :categories, :only => [ :index ]
   resources :regions, :only => [ :index ]
 
