@@ -72,6 +72,7 @@ body {
 #wrapper {
 	width:960px;
 	margin:0 auto;
+	padding-bottom:20px;
 	background:url(images/phone.png) 0 60px no-repeat;
 }
 
@@ -121,7 +122,7 @@ strong {
 /*************** NAVIGATION  *******************/
 
 #nav ul {
-	width:425px;
+	width:390px;
 	float:right;
 	margin:5px 0;
 	font-size:12px;
@@ -166,6 +167,10 @@ strong {
 		background-color:none;
 		padding:0;
 		margin-top:-3px;
+	}
+	
+	#nav ul li.twitter a:hover, #footer ul li.twitter a:hover {
+		background:url(images/twitter-on.png) no-repeat;
 	}
 	
 #footer {
@@ -267,6 +272,7 @@ strong {
 		float:left;
 		margin-right:10px;
 	}
+	
 	
 	#appstore p {
 		margin-top:25px;
