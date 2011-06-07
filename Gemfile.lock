@@ -51,6 +51,7 @@ GEM
       loofah (>= 0.3.1)
       nokogiri (> 0.0.0)
       sax-machine (>= 0.0.12)
+    geocoder (1.0.1)
     haml (3.0.25)
     i18n (0.5.0)
     loofah (1.0.0)
@@ -98,6 +99,7 @@ DEPENDENCIES
   clearance!
   factory_girl_rails
   feedzirra
+  geocoder
   haml
   nokogiri
   rails (= 3.0.3)

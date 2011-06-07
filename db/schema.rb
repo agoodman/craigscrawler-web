@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110524202030) do
+ActiveRecord::Schema.define(:version => 20110607161331) do
 
   create_table "categories", :force => true do |t|
     t.integer   "parent_id"
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(:version => 20110524202030) do
   add_index "feeds_keywords", ["feed_id", "keyword_id"], :name => "index_feeds_keywords_on_feed_id_and_keyword_id", :unique => true
 
   create_table "filters", :force => true do |t|
-    t.string   "key"
-    t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "key"
+    t.string    "value"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "filters_queries", :id => false, :force => true do |t|
@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(:version => 20110524202030) do
   add_index "items", ["feed_id"], :name => "index_items_on_feed_id"
 
   create_table "keywords", :force => true do |t|
-    t.string   "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "value"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "keywords_queries", :id => false, :force => true do |t|
@@ -84,11 +84,11 @@ ActiveRecord::Schema.define(:version => 20110524202030) do
   add_index "keywords_queries", ["keyword_id", "query_id"], :name => "index_keywords_queries_on_keyword_id_and_query_id", :unique => true
 
   create_table "queries", :force => true do |t|
-    t.string   "region"
-    t.string   "category"
-    t.string   "scope"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "region"
+    t.string    "category"
+    t.string    "scope"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "regions", :force => true do |t|
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20110524202030) do
     t.string    "title"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.float     "latitude"
+    t.float     "longitude"
   end
 
   create_table "users", :force => true do |t|
