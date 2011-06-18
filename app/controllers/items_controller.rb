@@ -45,18 +45,28 @@ class ItemsController < ApplicationController
       scope = "A"
     end
     if params[:feed][:keywords]
-      keywords = "query=" + params[:feed][:keywords].split(' ').join("+") + "&"
+      keywords = params[:feed][:keywords].split(' ').join("+")
     else
       keywords = ""
     end
-    url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?#{keywords}srchType=#{scope}&format=rss".gsub(/ /,"+")
     if params[:feed][:filters]
-      params[:feed][:filters].keys.each do |f|
-        url += "&#{f}=#{params[:feed][:filters][f.to_sym]}"
-      end
+      filters = params[:feed][:filters].keys.collect {|f| "#{f}=#{params[:feed][:filters][f.to_sym]}"}.join("&") + "&"
+    else
+      filters = ""
+    end
+    
+    if keywords == "" && filters == ""
+      # handle case where no keywords or filters are sent
+      url = "http://#{params[:feed][:region]}.craigslist.org/#{params[:feed][:category]}/index.rss"
+    elsif params[:s]
+      # client requested a start index, so send it to CL
+      url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?query=#{keywords}&srchType=#{scope}&#{filters}s=#{params[:s]}&format=rss".gsub(/ /,"+")
+    else      
+      # no start index given, so don't send one to CL
+      url = "http://#{params[:feed][:region]}.craigslist.org/search/#{params[:feed][:category]}?query=#{keywords}&srchType=#{scope}&#{filters}format=rss".gsub(/ /,"+")
     end
     puts "Fetching #{url}"
-    rss = Feedzirra::Feed.fetch_and_parse(url)
+    rss = Feedzirra::Feed.fetch_and_parse(url, :max_redirects => 10)
     # cutoff_date = @feed.last_item_published_at
     # new_entries = rss.entries.select {|e| e.published > cutoff_date}
     if rss
