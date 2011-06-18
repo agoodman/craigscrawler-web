@@ -5,7 +5,9 @@ class Feed < ActiveRecord::Base
   has_and_belongs_to_many :keywords
   has_and_belongs_to_many :filters
   
-  validates_presence_of :user_id
+  validates_presence_of :user_id, :region, :category
+  
+  attr_accessible :region, :category
 
   REGIONS = { 
     'abilene' => 'abilene',

@@ -9,7 +9,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @feeds.to_json(:include => :keywords) }
+      format.json { render :json => @feeds.to_json(:include => [:keywords,:filters]) }
     end
   end
 
@@ -20,7 +20,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @feed.to_json(:include => [:keywords,:items]) }
+      format.json { render :json => @feed.to_json(:include => [:keywords,:filters,:items]) }
     end
   end
 
@@ -41,6 +41,19 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.save
+        if params[:feed][:filters]
+          params[:feed][:filters].keys.each do |f|
+            filter = Filter.find_or_create_by_key_and_value(f, params[:feed][:filters][f.to_sym])
+            @feed.filters << filter
+          end
+        end
+        if ! params[:feed][:keywords].nil?
+          params[:feed][:keywords].split(' ').each do |k|
+            keyword = Keyword.find_or_create_by_value(k)
+            @feed.keywords << keyword
+          end
+        end
+        
         format.html { redirect_to(@feed, :notice => 'Feed was successfully created.') }
         format.json { render :json => @feed, :status => :ok, :location => @feed }
       else
