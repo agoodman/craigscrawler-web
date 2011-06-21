@@ -9,6 +9,8 @@ class Feed < ActiveRecord::Base
   
   attr_accessible :region, :category
 
+  after_create :retrieve_items
+  
   REGIONS = { 
     'abilene' => 'abilene',
     'akroncanton' => 'akron / canton',
@@ -478,5 +480,79 @@ class Feed < ActiveRecord::Base
       items.first.published_at unless items.empty?
     end
   end
+
+  def scope
+    if attributes['scope']
+      attributes['scope']
+    else
+      "A"
+    end
+  end
   
+  def item_count
+    items.count
+  end
+  
+  def retrieve_items(temporary = false)
+    if scope.blank?
+      tScope = "A"
+    else
+      tScope = scope
+    end
+    if keywords.empty?
+      tKeywords = ""
+    else
+      tKeywords = keywords.map(&:value).join("+")
+    end
+    if filters.empty?
+      tFilters = ""
+    else
+      tFilters = filters.collect {|f| "#{f.key}=#{f.value}"}.join("&") + "&"
+    end
+
+    if tKeywords == "" && tFilters == ""
+      # handle case where no keywords or filters are present
+      url = "http://#{region}.craigslist.org/#{category}/index.rss"
+    else      
+      url = "http://#{region}.craigslist.org/search/#{category}?query=#{tKeywords}&srchType=#{tScope}&#{tFilters}format=rss".gsub(/ /,"+")
+    end
+    puts "Fetching #{url}"
+    rss = Feedzirra::Feed.fetch_and_parse(url)
+    if rss
+      cutoff_date = last_item_published_at
+      new_entries = rss.entries.select {|e| e.published > cutoff_date}
+      puts "Found #{rss.entries.size} entries (#{new_entries.size} new)"
+      housing_regex = /(.+) \$(\d+) ?(.*)/
+      location_price_regex = /(.+) \((.+)\) ?\$?(\d+)?/
+      location_regex = /(.+) \((.+)\)/
+      items = new_entries.map do |e| 
+        if temporary
+          if e.title =~ location_price_regex
+            Item.new(:title => e.title.match(location_price_regex)[1], :price => e.title.match(location_price_regex)[3], :location => e.title.match(location_price_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          elsif e.title =~ location_regex
+            Item.new(:title => e.title.match(location_regex)[1], :location => e.title.match(location_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          elsif e.title =~ housing_regex
+              Item.new(:title => e.title.match(housing_regex)[1], :price => e.title.match(housing_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          else
+            Item.new(:title => e.title, :summary => e.summary, :link => e.url, :published_at => e.published)
+          end
+        else
+          if e.title =~ location_price_regex
+            Item.create(:feed_id => id, :title => e.title.match(location_price_regex)[1], :price => e.title.match(location_price_regex)[3], :location => e.title.match(location_price_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          elsif e.title =~ location_regex
+            Item.create(:feed_id => id, :title => e.title.match(location_regex)[1], :location => e.title.match(location_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          elsif e.title =~ housing_regex
+              Item.create(:feed_id => id, :title => e.title.match(housing_regex)[1], :price => e.title.match(housing_regex)[2], :summary => e.summary, :link => e.url, :published_at => e.published)
+          else
+            Item.create(:feed_id => id, :title => e.title, :summary => e.summary, :link => e.url, :published_at => e.published)
+          end
+        end
+      end
+    else
+      puts "Unable to parse feed"
+      items = []
+    end
+    items
+  end
+
 end

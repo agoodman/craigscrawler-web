@@ -9,7 +9,7 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @feeds.to_json(:include => [:keywords,:filters]) }
+      format.json { render :json => @feeds.to_json(:include => [:keywords,:filters], :methods => :item_count) }
     end
   end
 
@@ -43,7 +43,7 @@ class FeedsController < ApplicationController
       if @feed.save
         if params[:feed][:filters]
           params[:feed][:filters].keys.each do |f|
-            filter = Filter.find_or_create_by_key_and_value(f, params[:feed][:filters][f.to_sym])
+            filter = Filter.find_or_create_by_key_and_value(f.to_s, params[:feed][:filters][f.to_sym].to_s)
             @feed.filters << filter
           end
         end
