@@ -37,6 +37,7 @@ GEM
     activesupport (3.0.3)
     arel (2.0.6)
     builder (2.1.2)
+    carmen (0.2.8)
     curb (0.7.9)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -96,6 +97,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carmen
   clearance!
   factory_girl_rails
   feedzirra
