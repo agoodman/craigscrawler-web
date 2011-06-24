@@ -9,6 +9,8 @@ gem 'feedzirra'
 gem 'clearance', :git => 'git://github.com/agoodman/clearance.git'
 gem 'haml'
 gem 'nokogiri'
+gem 'geocoder'
+gem 'carmen'
 
 # Use unicorn as the web server
 # gem 'unicorn'
