@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110607161331) do
+ActiveRecord::Schema.define(:version => 20110624182506) do
 
   create_table "categories", :force => true do |t|
     t.integer   "parent_id"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20110607161331) do
     t.timestamp "updated_at"
     t.float     "latitude"
     t.float     "longitude"
+    t.string    "state"
   end
 
   create_table "users", :force => true do |t|
