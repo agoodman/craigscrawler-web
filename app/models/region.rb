@@ -1,5 +1,7 @@
 class Region < ActiveRecord::Base
 
+  has_many :subregions
+  
   validates_presence_of :code, :title
   
   def title

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110624182506) do
+ActiveRecord::Schema.define(:version => 20110715160902) do
 
   create_table "categories", :force => true do |t|
     t.integer   "parent_id"
@@ -99,6 +99,14 @@ ActiveRecord::Schema.define(:version => 20110624182506) do
     t.float     "latitude"
     t.float     "longitude"
     t.string    "state"
+  end
+
+  create_table "subregions", :force => true do |t|
+    t.integer  "region_id"
+    t.string   "code"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
