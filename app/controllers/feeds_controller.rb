@@ -71,6 +71,22 @@ class FeedsController < ApplicationController
 
     respond_to do |format|
       if @feed.update_attributes(params[:feed])
+        @feed.filters.clear
+        if params[:feed][:filters]
+          params[:feed][:filters].keys.each do |f|
+            filter = Filter.find_or_create_by_key_and_value(f.to_s, params[:feed][:filters][f.to_sym].to_s)
+            @feed.filters << filter
+          end
+        end
+        @feed.keywords.clear
+        if ! params[:feed][:keywords].nil?
+          params[:feed][:keywords].split(' ').each do |k|
+            keyword = Keyword.find_or_create_by_value(k)
+            @feed.keywords << keyword
+          end
+        end
+        @feed.load_items unless @feed.filters.empty? || @feed.keywords.empty?
+        
         format.html { redirect_to(@feed, :notice => 'Feed was successfully updated.') }
         format.json { head :ok }
       else
