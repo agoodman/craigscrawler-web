@@ -1,4 +1,4 @@
 Factory.define :feed do |feed|
-  feed.region   { Feed::REGIONS.keys[0] }
-  feed.category { Feed::CATEGORIES.keys[0] }
+  feed.region   { "tampa" }
+  feed.category { "sss" }
 end
