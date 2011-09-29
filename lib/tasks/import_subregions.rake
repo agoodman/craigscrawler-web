@@ -28,7 +28,7 @@ task :import_subregions => :environment do
     doc = Nokogiri::HTML(response.body)
     
     matches = doc.css("#topban .sublinks a")
-    puts "#{matches.count} matches for #{region.code}"
+    puts "#{matches.count} matches for #{region.code}" unless matches.count==0
 
     matches.each do |match|
       href = match.attributes['href'].value
