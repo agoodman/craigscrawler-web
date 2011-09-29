@@ -1,9 +1,11 @@
 require 'test_helper'
 
 class SubregionsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
+
+  context "on get index as json" do
+    setup { get :index, :format => 'json' }
+    should assign_to :regions
+    should respond_with :success
   end
 
 end
