@@ -4,4 +4,6 @@ class Item < ActiveRecord::Base
   
   validates_presence_of :feed_id, :title, :link, :published_at
   
+  scope :stale, where(['created_at < ?',Time.now-30.days])
+  
 end
