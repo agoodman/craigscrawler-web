@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class EmailsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  context "on get index as json" do
+    setup { get :index, :format => 'json' }
+    should respond_with :success
   end
+  
 end
