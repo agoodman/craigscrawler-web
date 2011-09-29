@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_filter :save_query, :only => :index
   
   def index
-    retrieve_items
+    @items = Feed.retrieve_items(params[:feed], 0, true)
     respond_to do |format|
       format.json { render :json => @items.to_json(:only => [:title,:price,:summary,:link,:location,:published_at]) }
     end

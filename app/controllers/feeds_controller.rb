@@ -53,6 +53,7 @@ class FeedsController < ApplicationController
             @feed.keywords << keyword
           end
         end
+        @feed.load_items
         
         format.html { redirect_to(@feed, :notice => 'Feed was successfully created.') }
         format.json { render :json => @feed, :status => :ok, :location => @feed }
