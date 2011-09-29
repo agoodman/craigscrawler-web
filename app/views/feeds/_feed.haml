@@ -1,6 +1,6 @@
 %tr
-	%td= Region.find_by_code(feed.region).title
-	%td= Category.find_by_code(feed.category).title
+	%td= (region=Region.find_by_code(feed.region)).title unless region.nil?
+	%td= (category=Category.find_by_code(feed.category)).title unless category.nil?
 	%td
 		%ul
 			= render :partial => 'feeds/keywords/keyword', :collection => feed.keywords, :locals => { :delete => false, :feed => feed }
