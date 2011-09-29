@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110715160902) do
+ActiveRecord::Schema.define(:version => 20110929174828) do
 
   create_table "categories", :force => true do |t|
     t.integer   "parent_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110715160902) do
     t.string    "category"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string    "scope"
   end
 
   create_table "feeds_filters", :id => false, :force => true do |t|
@@ -102,11 +103,11 @@ ActiveRecord::Schema.define(:version => 20110715160902) do
   end
 
   create_table "subregions", :force => true do |t|
-    t.integer  "region_id"
-    t.string   "code"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "region_id"
+    t.string    "code"
+    t.string    "title"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "users", :force => true do |t|
