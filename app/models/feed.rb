@@ -7,7 +7,7 @@ class Feed < ActiveRecord::Base
   
   validates_presence_of :user_id, :region, :category
   
-  attr_accessible :region, :category
+  attr_accessible :region, :category, :scope
 
   REGIONS = { 
     'abilene' => 'abilene',
